@@ -18,8 +18,17 @@ class Github
         return $this->user;
     }
 
+    public function profile()
+    {
+        // return $this->getUser()->github;
+        return [
+            'profile' => 'saularis',
+            'token' => 'sample_token'
+        ];
+    }
+
     public function token()
     {
-        return 'sample_token';
+        return $this->profile()['token'];
     }
 }
