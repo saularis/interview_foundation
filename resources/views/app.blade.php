@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
-        <a href="https://github.com/login/oauth/authorize?client_id=d61f5d673d76ec2ad68a">Github Login</a>
+        <div id="root">
+            @yield('content')
+            <!-- <starred-repo></starred-repo> -->
+        </div>
+        <script src="/js/app.js"></script>
     </body>
 </html>

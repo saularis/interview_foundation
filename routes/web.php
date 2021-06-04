@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    //ray(cookie('isLoggedIn'));
+    if(Cookie::get('isLoggedIn')){
+        return redirect('/home');
+    }
     return view('welcome');
+});
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('/callback', function () {
+    $user = new User();
+    $user->code = request('code');
+    $user->save();
+    Cookie::queue('isLoggedIn', true, 10);
+    return redirect('/home');
 });
