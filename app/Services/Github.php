@@ -2,39 +2,26 @@
 
 namespace App\Services;
 
-use App\User;
+use Github\Client as GithubClient;
 
 class Github
 {
-    protected User $user;
 
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+    protected GithubClient $githubClient;
 
-    public function getUser()
+    public function __construct($token)
     {
-        return $this->user;
+        $this->githubClient = new GithubClient();
+        $this->githubClient->authentication($token, null, 'access_token_header');
     }
 
     public function profile()
     {
-        // return $this->getUser()->github;
-        return [
-            'profile' => 'saularis',
-            'token' => 'sample_token'
-        ];
-    }
-
-    public function token()
-    {
-        // return $this->profile()->token;
-        return $this->profile()['token'];
+        return $this->githubClient->api('me');
     }
 
     public function starred()
     {
-        return 'star repositories';
+        return $this->profile()->starring()->all();
     }
 }
