@@ -8,28 +8,32 @@ use PHPUnit\Framework\TestCase;
 
 class GithubTest extends TestCase
 {
+    protected GitHub $github;
+
+    public function setUp() : void
+    {
+        $this->github = new Github(new User);
+    }
+    
     /** @test */
     function it_has_user_instance()
     {
-        $github = new Github(new User);
-        $this->assertInstanceOf(User::class, $github->getUser());
+        $this->assertInstanceOf(User::class, $this->github->getUser());
     }
 
     /** @test */
     function it_contains_profile_info()
     {
-        $github = new Github(new User);
         $profile = [
             'profile' => 'saularis',
             'token' => 'sample_token'
         ];
-        $this->assertEquals($profile, $github->profile());
+        $this->assertEquals($profile, $this->github->profile());
     }
 
     /** @test */
     function it_contains_github_token()
     {
-        $github = new Github(new User);
-        $this->assertEquals('sample_token', $github->token());
+        $this->assertEquals('sample_token', $this->github->token());
     }
 }

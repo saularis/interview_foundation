@@ -29,6 +29,7 @@ class Github
 
     public function token()
     {
+        // return $this->profile()->token;
         return $this->profile()['token'];
     }
 }
