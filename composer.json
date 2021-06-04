@@ -15,7 +15,8 @@
         "http-interop/http-factory-guzzle": "^1.0",
         "knplabs/github-api": "^3.0",
         "laravel/framework": "^7.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "spatie/laravel-ray": "^1.19"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
