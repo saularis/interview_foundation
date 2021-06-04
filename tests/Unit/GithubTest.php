@@ -14,7 +14,7 @@ class GithubTest extends TestCase
     {
         $this->github = new Github(new User);
     }
-    
+
     /** @test */
     function it_has_user_instance()
     {
@@ -35,5 +35,11 @@ class GithubTest extends TestCase
     function it_contains_github_token()
     {
         $this->assertEquals('sample_token', $this->github->token());
+    }
+
+    /** @test */
+    function it_displayes_star_repos_for_the_user()
+    {
+        $this->assertEquals('star repositories', $this->github->starred());
     }
 }

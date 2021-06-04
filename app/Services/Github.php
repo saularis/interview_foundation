@@ -32,4 +32,9 @@ class Github
         // return $this->profile()->token;
         return $this->profile()['token'];
     }
+
+    public function starred()
+    {
+        return 'star repositories';
+    }
 }
