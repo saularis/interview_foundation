@@ -3,25 +3,24 @@
 namespace App\Services;
 
 use Github\Client as GithubClient;
+use App\Exceptions\GithubException;
+use Github\Exception\RuntimeException;
 
-class Github
+class Github extends GithubClient
 {
-
-    protected GithubClient $githubClient;
-
-    public function __construct($token)
+    public function setAccessToken($token)
     {
-        $this->githubClient = new GithubClient();
-        $this->githubClient->authentication($token, null, 'access_token_header');
+        $this->authenticate($token, null, 'access_token_header');
+        return $this;
     }
 
-    public function profile()
+    public function getStarredRepos()
     {
-        return $this->githubClient->api('me');
-    }
-
-    public function starred()
-    {
-        return $this->profile()->starring()->all();
+        try {
+            $starredRepos = $this->api('me')->starring()->all();
+        } catch (RuntimeException $exception) {
+            throw new GithubException($exception->getMessage(), 401);
+        }
+        return $starredRepos;
     }
 }
