@@ -1,4 +1,4 @@
 @extends('app')
 @section('content')
-<home></home>
+<home user="{{ json_encode($user) }}"></home>
 @endsection
