@@ -20,7 +20,7 @@
             </b-form>
         </div>
         <div v-if="!currentUser.token">
-            <b-alert show variant="info">No Token? <a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">Click here to learn how to make token.</a></b-alert>
+            <b-alert show variant="info">No Token? <a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">Click here to learn how to make token.</a></b-alert>
         </div>
         <div>
             <b-table striped hover :items="items"></b-table>
