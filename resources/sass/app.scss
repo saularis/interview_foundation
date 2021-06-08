@@ -1,2 +1,14 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
+
+.inline-form{
+    margin-top: 20px;
+    & > input{
+        width: 80%;
+    }
+    & > button{
+        margin-left: 20px;
+        width: 20%;
+        height: 40px;
+    }
+}
