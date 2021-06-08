@@ -11,12 +11,7 @@ class GithubStarredReposTest extends TestCase
     public function it_gets_starred_repos_from_github()
     {
         Http::fake(function ($request) {
-            return Http::response([
-                'starred_repos' => [
-                    ['repo1' => 'details'],
-                    ['repo2' => 'details'],
-                ]
-            ], 200);
+            return Http::response('starred repos', 200);
         });
 
         $response = Http::post('/user/starred-repos', [
@@ -25,11 +20,6 @@ class GithubStarredReposTest extends TestCase
             'email' => 'abdulla.coder@gmail.com'
         ]);
         
-        $this->assertEquals([
-            'starred_repos' => [
-                    ['repo1' => 'details'],
-                    ['repo2' => 'details'],
-                ]
-            ], $response->body());
+        $this->assertEquals('starred repos', $response->body());
     }
 }
