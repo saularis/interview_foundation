@@ -1,8 +1,9 @@
 <?php
 
 use App\User;
-use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cookie;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {
-    //ray(cookie('isLoggedIn'));
-    if(Cookie::get('isLoggedIn')){
-        return redirect('/home');
-    }
-    return view('welcome');
-});
+Route::get('/', 'GuestController@index')->name('welcome');
+Route::get('/login', 'AuthController@githubRedirect');
+Route::get('/callback', 'AuthController@githubCallback');
+Route::get('/logout', 'AuthController@logout');
 
-Route::get('/home', 'HomeController@index');
-
-Route::get('/callback', function () {
-    $user = new User();
-    $user->code = request('code');
-    $user->save();
-    Cookie::queue('isLoggedIn', true, 10);
-    return redirect('/home');
-});
+Route::get('/home', 'HomeController@index')->middleware('web', 'auth');
+Route::post('/user/starred-repos', 'UserController@getStarredRepos')->middleware('web', 'auth');
